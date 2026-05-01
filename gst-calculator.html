@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Free GST Calculator India 2024 — Instant GST Calculation</title>
+<meta name="description" content="Free online GST calculator for India. Calculate GST inclusive and exclusive amounts instantly. Supports 5%, 12%, 18%, 28% GST rates."/>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f5f7fa;min-height:100vh;color:#111}
+.nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:14px 24px;display:flex;align-items:center;gap:16px}
+.nav .logo{font-weight:700;font-size:15px;color:#111;text-decoration:none}
+.nav .logo span{color:#22c55e}
+.nav-links{display:flex;gap:16px;margin-left:auto}
+.nav-links a{font-size:13px;color:#666;text-decoration:none}
+.nav-links a:hover{color:#22c55e}
+.hero{background:linear-gradient(135deg,#0f172a,#1e3a5f);color:#fff;padding:48px 24px;text-align:center}
+.hero h1{font-size:32px;font-weight:700;margin-bottom:8px;letter-spacing:-.5px}
+.hero p{font-size:15px;color:#94a3b8}
+.container{max-width:640px;margin:0 auto;padding:32px 16px}
+.card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 2px 16px rgba(0,0,0,.06);margin-bottom:20px}
+.card h2{font-size:16px;font-weight:600;margin-bottom:20px;color:#111}
+.form-group{margin-bottom:16px}
+label{display:block;font-size:12px;font-weight:600;color:#555;margin-bottom:6px;letter-spacing:.5px;text-transform:uppercase}
+input,select{width:100%;padding:12px 14px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;transition:border-color .2s;background:#fff}
+input:focus,select:focus{outline:none;border-color:#22c55e}
+.type-tabs{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1.5px solid #e5e7eb;border-radius:10px;overflow:hidden;margin-bottom:16px}
+.type-tab{padding:11px;text-align:center;font-size:13px;font-weight:600;cursor:pointer;background:#fff;border:none;font-family:'Inter',sans-serif;transition:.2s;color:#666}
+.type-tab.active{background:#22c55e;color:#fff}
+.calc-btn{width:100%;padding:14px;background:#22c55e;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;margin-top:4px;font-family:'Inter',sans-serif;transition:.2s}
+.calc-btn:hover{background:#16a34a}
+.result-box{background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:12px;padding:20px;margin-top:16px;display:none}
+.result-row{display:flex;justify-content:space-between;padding:8px 0;font-size:14px;border-bottom:1px solid #dcfce7}
+.result-row:last-child{border-bottom:none;font-weight:700;font-size:16px;color:#166534;padding-top:12px;margin-top:4px;border-top:2px solid #86efac}
+.result-row span:last-child{font-family:'JetBrains Mono',monospace}
+.result-row.tax{color:#15803d}
+.gst-rates{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.rate-card{background:#f8fafc;border:1.5px solid #e5e7eb;border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:.2s}
+.rate-card:hover{border-color:#22c55e}
+.rate-card.selected{border-color:#22c55e;background:#f0fdf4}
+.rate-card .rate{font-size:20px;font-weight:700;color:#111}
+.rate-card .label{font-size:11px;color:#888;margin-top:2px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+.info-card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.info-card h3{font-size:14px;font-weight:600;margin-bottom:10px;color:#111}
+.info-card p{font-size:13px;color:#666;line-height:1.6}
+.footer{text-align:center;padding:32px 16px;color:#888;font-size:13px}
+.footer a{color:#22c55e;text-decoration:none}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="logo">Bill<span>Pad</span></a>
+  <div class="nav-links">
+    <a href="index.html">Invoice Generator</a>
+    <a href="emi-calculator.html">EMI Calc</a>
+    <a href="salary-slip.html">Salary Slip</a>
+    <a href="profit-loss.html">P&L Calc</a>
+  </div>
+</nav>
+<div class="hero">
+  <h1>Free GST Calculator India</h1>
+  <p>Calculate GST amount instantly — inclusive & exclusive</p>
+</div>
+<div class="container">
+  <div class="card">
+    <h2>Select GST Rate</h2>
+    <div class="gst-rates">
+      <div class="rate-card" onclick="selectRate(0,this)"><div class="rate">0%</div><div class="label">Exempt</div></div>
+      <div class="rate-card" onclick="selectRate(5,this)"><div class="rate">5%</div><div class="label">Essential</div></div>
+      <div class="rate-card selected" onclick="selectRate(12,this)"><div class="rate">12%</div><div class="label">Standard</div></div>
+      <div class="rate-card" onclick="selectRate(18,this)"><div class="rate">18%</div><div class="label">Services</div></div>
+    </div>
+    <div class="rate-card" onclick="selectRate(28,this)" style="margin-bottom:16px;display:flex;justify-content:center;align-items:center;gap:12px;padding:12px 20px">
+      <div class="rate" style="font-size:18px">28%</div><div class="label">Luxury Goods</div>
+    </div>
+    <h2>Calculation Type</h2>
+    <div class="type-tabs">
+      <button class="type-tab active" id="excl-btn" onclick="setType('exclusive')">Exclusive (Add GST)</button>
+      <button class="type-tab" id="incl-btn" onclick="setType('inclusive')">Inclusive (Remove GST)</button>
+    </div>
+    <div class="form-group">
+      <label id="amount-label">Original Amount (without GST) ₹</label>
+      <input type="number" id="amount" placeholder="Enter amount" oninput="calculate()"/>
+    </div>
+    <div class="form-group">
+      <label>GST Type</label>
+      <select id="gst-type" onchange="calculate()">
+        <option value="intra">Intra-State (CGST + SGST)</option>
+        <option value="inter">Inter-State (IGST)</option>
+      </select>
+    </div>
+    <button class="calc-btn" onclick="calculate()">Calculate GST</button>
+    <div class="result-box" id="result-box">
+      <div class="result-row"><span>Original Amount</span><span id="r-original"></span></div>
+      <div class="result-row tax" id="r-tax-row1"></div>
+      <div class="result-row tax" id="r-tax-row2"></div>
+      <div class="result-row"><span>Total GST</span><span id="r-total-tax"></span></div>
+      <div class="result-row"><span>Final Amount</span><span id="r-final"></span></div>
+    </div>
+  </div>
+  <div class="info-grid">
+    <div class="info-card"><h3>What is GST?</h3><p>Goods & Services Tax is a unified indirect tax on the supply of goods and services across India, replacing multiple cascading taxes.</p></div>
+    <div class="info-card"><h3>CGST vs SGST vs IGST</h3><p>Intra-state supplies attract CGST + SGST (equal halves). Inter-state supplies attract IGST (full rate).</p></div>
+    <div class="info-card"><h3>0% GST Items</h3><p>Fresh vegetables, milk, eggs, bread, salt, and essential medicines are exempt from GST.</p></div>
+    <div class="info-card"><h3>28% GST Items</h3><p>Luxury cars, tobacco, aerated drinks, cement, and certain electronics attract 28% GST.</p></div>
+  </div>
+</div>
+<div class="footer"><p>Free tool by <a href="index.html">GST Invoice Pro</a> · No signup required · Always free</p></div>
+<script>
+let gstRate=12, calcType='exclusive';
+function selectRate(r,el){
+  gstRate=r;
+  document.querySelectorAll('.rate-card').forEach(e=>e.classList.remove('selected'));
+  el.classList.add('selected');
+  calculate();
+}
+function setType(t){
+  calcType=t;
+  document.getElementById('excl-btn').className='type-tab'+(t==='exclusive'?' active':'');
+  document.getElementById('incl-btn').className='type-tab'+(t==='inclusive'?' active':'');
+  document.getElementById('amount-label').textContent=t==='exclusive'?'Original Amount (without GST) ₹':'Total Amount (with GST) ₹';
+  calculate();
+}
+function calculate(){
+  const amt=parseFloat(document.getElementById('amount').value)||0;
+  if(!amt){document.getElementById('result-box').style.display='none';return;}
+  const type=document.getElementById('gst-type').value;
+  let original,tax,final;
+  if(calcType==='exclusive'){original=amt;tax=amt*(gstRate/100);final=amt+tax;}
+  else{final=amt;original=amt/(1+gstRate/100);tax=final-original;}
+  const fmt=v=>'₹ '+v.toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
+  document.getElementById('r-original').textContent=fmt(original);
+  document.getElementById('r-final').textContent=fmt(final);
+  document.getElementById('r-total-tax').textContent=fmt(tax);
+  if(type==='intra'){
+    document.getElementById('r-tax-row1').innerHTML=`<span>CGST @ ${gstRate/2}%</span><span>${fmt(tax/2)}</span>`;
+    document.getElementById('r-tax-row2').innerHTML=`<span>SGST @ ${gstRate/2}%</span><span>${fmt(tax/2)}</span>`;
+    document.getElementById('r-tax-row2').style.display='flex';
+  } else {
+    document.getElementById('r-tax-row1').innerHTML=`<span>IGST @ ${gstRate}%</span><span>${fmt(tax)}</span>`;
+    document.getElementById('r-tax-row2').style.display='none';
+  }
+  document.getElementById('result-box').style.display='block';
+}
+</script>
+</body>
+</html>

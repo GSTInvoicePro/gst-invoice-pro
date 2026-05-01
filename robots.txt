@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://BillPadpro.github.io/gst-invoice-pro/sitemap.xml

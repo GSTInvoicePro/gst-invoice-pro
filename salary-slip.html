@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Free Salary Slip Generator India — Payslip Maker Online</title>
+<meta name="description" content="Free salary slip generator for Indian employees. Create professional payslips with PF, ESI, TDS deductions instantly. Download as PDF."/>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f5f7fa;min-height:100vh;color:#111}
+.nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:14px 24px;display:flex;align-items:center;gap:16px}
+.nav .logo{font-weight:700;font-size:15px;color:#111;text-decoration:none}
+.nav .logo span{color:#22c55e}
+.nav-links{display:flex;gap:16px;margin-left:auto}
+.nav-links a{font-size:13px;color:#666;text-decoration:none}
+.hero{background:linear-gradient(135deg,#0c4a6e,#0284c7);color:#fff;padding:48px 24px;text-align:center}
+.hero h1{font-size:32px;font-weight:700;margin-bottom:8px;letter-spacing:-.5px}
+.hero p{font-size:15px;color:#bae6fd}
+.app{display:grid;grid-template-columns:420px 1fr;gap:0;height:calc(100vh - 180px);min-height:600px}
+.form-panel{background:#fff;border-right:1px solid #e5e7eb;overflow-y:auto;padding:20px}
+.preview-panel{background:#e5e7eb;overflow-y:auto;padding:24px;display:flex;flex-direction:column;align-items:center}
+.section{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #f0f0f0}
+.section:last-child{border-bottom:none}
+.section-title{font-size:11px;font-weight:700;letter-spacing:1.2px;color:#0284c7;text-transform:uppercase;margin-bottom:12px}
+.row{display:grid;gap:8px;margin-bottom:8px}
+.row.c2{grid-template-columns:1fr 1fr}
+.fg{display:flex;flex-direction:column;gap:4px}
+label{font-size:11px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:.5px}
+input,select{padding:9px 11px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:12.5px;font-family:'Inter',sans-serif;transition:border-color .2s;width:100%}
+input:focus,select:focus{outline:none;border-color:#0284c7}
+.gen-btn{width:100%;padding:12px;background:#0284c7;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;margin-top:4px;transition:.2s}
+.gen-btn:hover{background:#0369a1}
+.print-btn{width:100%;padding:11px;background:#22c55e;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;margin-top:8px;transition:.2s}
+.print-btn:hover{background:#16a34a}
+/* Salary Slip */
+.slip{background:#fff;width:680px;max-width:100%;padding:32px;box-shadow:0 4px 24px rgba(0,0,0,.12);font-size:12.5px}
+.slip-header{background:#0c4a6e;color:#fff;padding:20px 24px;border-radius:8px 8px 0 0;margin:-32px -32px 24px;display:flex;justify-content:space-between;align-items:center}
+.slip-header h2{font-size:20px;font-weight:700}
+.slip-header p{font-size:12px;color:#bae6fd;margin-top:2px}
+.slip-title{font-size:13px;font-weight:700;letter-spacing:1px;text-align:right;color:#bae6fd}
+.slip-title .month{font-size:11px;margin-top:2px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;background:#f8fafc;border-radius:8px;padding:16px}
+.info-row{display:flex;flex-direction:column;gap:2px}
+.info-row .lbl{font-size:10px;color:#888;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.info-row .val{font-size:13px;color:#111;font-weight:500}
+.earnings-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.earn-box,.deduct-box{border-radius:8px;overflow:hidden}
+.box-title{padding:8px 14px;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase}
+.earn-box .box-title{background:#f0fdf4;color:#15803d}
+.deduct-box .box-title{background:#fef2f2;color:#dc2626}
+.box-row{display:flex;justify-content:space-between;padding:7px 14px;font-size:12px;border-bottom:1px solid #f5f5f5}
+.box-row:last-child{border-bottom:none}
+.box-row .lbl{color:#444}
+.box-row .val{font-family:'JetBrains Mono',monospace;font-weight:500}
+.box-total{display:flex;justify-content:space-between;padding:10px 14px;font-weight:700;font-size:13px}
+.earn-box .box-total{background:#dcfce7;color:#15803d}
+.deduct-box .box-total{background:#fee2e2;color:#dc2626}
+.net-row{background:#0c4a6e;color:#fff;border-radius:8px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+.net-row .label{font-size:14px;font-weight:600}
+.net-row .amount{font-size:22px;font-weight:800;font-family:'JetBrains Mono',monospace}
+.words-row{background:#eff6ff;border-radius:6px;padding:10px 14px;margin-top:10px;font-size:11px}
+.words-row span:first-child{color:#1e40af;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-right:6px}
+.slip-footer{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;padding-top:20px;border-top:1px solid #e5e7eb;font-size:11px;color:#888}
+.sign-area{border-top:1px solid #ccc;padding-top:6px;margin-top:32px;font-size:11px;color:#888}
+@media print{.nav,.form-panel,.preview-panel>:not(.slip){display:none!important}.app{display:block;height:auto}.preview-panel{background:#fff;padding:0;display:block}.slip{box-shadow:none;width:100%}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="logo">Bill<span>Pad</span></a>
+  <div class="nav-links">
+    <a href="index.html">Invoice Generator</a>
+    <a href="gst-calculator.html">GST Calc</a>
+    <a href="emi-calculator.html">EMI Calc</a>
+    <a href="profit-loss.html">P&L Calc</a>
+  </div>
+</nav>
+<div class="hero">
+  <h1>Salary Slip Generator</h1>
+  <p>Professional payslips with PF, ESI, TDS — free & instant</p>
+</div>
+<div class="app">
+  <div class="form-panel">
+    <div class="section">
+      <div class="section-title">Company Details</div>
+      <div class="row"><div class="fg"><label>Company Name</label><input id="co-name" placeholder="ABC Pvt. Ltd." oninput="upd()"/></div></div>
+      <div class="row c2">
+        <div class="fg"><label>Address</label><input id="co-addr" placeholder="City, State" oninput="upd()"/></div>
+        <div class="fg"><label>Month & Year</label><input id="slip-month" type="month" oninput="upd()"/></div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">Employee Details</div>
+      <div class="row c2">
+        <div class="fg"><label>Employee Name</label><input id="emp-name" placeholder="Rahul Sharma" oninput="upd()"/></div>
+        <div class="fg"><label>Employee ID</label><input id="emp-id" placeholder="EMP001" oninput="upd()"/></div>
+      </div>
+      <div class="row c2">
+        <div class="fg"><label>Designation</label><input id="emp-desig" placeholder="Software Engineer" oninput="upd()"/></div>
+        <div class="fg"><label>Department</label><input id="emp-dept" placeholder="Engineering" oninput="upd()"/></div>
+      </div>
+      <div class="row c2">
+        <div class="fg"><label>Date of Joining</label><input id="emp-doj" type="date" oninput="upd()"/></div>
+        <div class="fg"><label>PAN Number</label><input id="emp-pan" placeholder="ABCDE1234F" oninput="upd()" class="mono" maxlength="10"/></div>
+      </div>
+      <div class="row c2">
+        <div class="fg"><label>Bank Account</label><input id="emp-bank" placeholder="XXXX XXXX 1234" oninput="upd()"/></div>
+        <div class="fg"><label>UAN Number</label><input id="emp-uan" placeholder="UAN (PF)" oninput="upd()"/></div>
+      </div>
+      <div class="row c2">
+        <div class="fg"><label>Working Days</label><input id="work-days" type="number" value="26" min="1" max="31" oninput="upd()"/></div>
+        <div class="fg"><label>Days Present</label><input id="days-present" type="number" value="26" min="0" max="31" oninput="upd()"/></div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">Salary Components</div>
+      <div class="row c2">
+        <div class="fg"><label>Basic Salary ₹</label><input id="basic" type="number" placeholder="30000" value="30000" oninput="autoCalc()"/></div>
+        <div class="fg"><label>HRA ₹</label><input id="hra" type="number" placeholder="15000" value="12000" oninput="upd()"/></div>
+      </div>
+      <div class="row c2">
+        <div class="fg"><label>Conveyance ₹</label><input id="conv" type="number" placeholder="1600" value="1600" oninput="upd()"/></div>
+        <div class="fg"><label>Medical ₹</label><input id="medical" type="number" placeholder="1250" value="1250" oninput="upd()"/></div>
+      </div>
+      <div class="row c2">
+        <div class="fg"><label>Special Allowance ₹</label><input id="special" type="number" placeholder="0" value="5000" oninput="upd()"/></div>
+        <div class="fg"><label>Other Allowance ₹</label><input id="other" type="number" placeholder="0" value="0" oninput="upd()"/></div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">Deductions</div>
+      <div class="row c2">
+        <div class="fg"><label>PF Employee ₹</label><input id="pf-emp" type="number" value="3600" oninput="upd()"/></div>
+        <div class="fg"><label>PF Employer ₹</label><input id="pf-er" type="number" value="3600" oninput="upd()"/></div>
+      </div>
+      <div class="row c2">
+        <div class="fg"><label>ESI Employee ₹</label><input id="esi-emp" type="number" value="0" oninput="upd()"/></div>
+        <div class="fg"><label>TDS ₹</label><input id="tds" type="number" value="0" oninput="upd()"/></div>
+      </div>
+      <div class="row c2">
+        <div class="fg"><label>Professional Tax ₹</label><input id="pt" type="number" value="200" oninput="upd()"/></div>
+        <div class="fg"><label>Other Deductions ₹</label><input id="other-ded" type="number" value="0" oninput="upd()"/></div>
+      </div>
+    </div>
+    <button class="gen-btn" onclick="upd()">Generate Salary Slip</button>
+    <button class="print-btn" onclick="window.print()">🖨 Download / Print</button>
+  </div>
+  <div class="preview-panel">
+    <div class="slip" id="slip-preview"></div>
+  </div>
+</div>
+<script>
+function g(id){return document.getElementById(id)?.value||'';}
+function n(id){return parseFloat(document.getElementById(id)?.value)||0;}
+function autoCalc(){
+  const basic=n('basic');
+  document.getElementById('hra').value=Math.round(basic*0.4);
+  document.getElementById('pf-emp').value=Math.round(basic*0.12);
+  document.getElementById('pf-er').value=Math.round(basic*0.12);
+  upd();
+}
+function numWords(n){
+  const a=['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
+  const b=['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
+  function w(n){
+    if(n<=0)return'';if(n<20)return a[n];if(n<100)return b[Math.floor(n/10)]+(n%10?' '+a[n%10]:'');
+    if(n<1000)return a[Math.floor(n/100)]+' Hundred'+(n%100?' '+w(n%100):'');
+    if(n<100000)return w(Math.floor(n/1000))+' Thousand'+(n%1000?' '+w(n%1000):'');
+    if(n<10000000)return w(Math.floor(n/100000))+' Lakh'+(n%100000?' '+w(n%100000):'');
+    return w(Math.floor(n/10000000))+' Crore'+(n%10000000?' '+w(n%10000000):'');
+  }
+  return w(Math.floor(n))+' Rupees Only';
+}
+function upd(){
+  const workDays=n('work-days')||26, daysPresent=n('days-present')||26;
+  const ratio=daysPresent/workDays;
+  const basic=Math.round(n('basic')*ratio), hra=Math.round(n('hra')*ratio);
+  const conv=n('conv'), medical=n('medical'), special=Math.round(n('special')*ratio), other=n('other');
+  const grossEarnings=basic+hra+conv+medical+special+other;
+  const pfEmp=n('pf-emp'), esiEmp=n('esi-emp'), tds=n('tds'), pt=n('pt'), otherDed=n('other-ded');
+  const totalDed=pfEmp+esiEmp+tds+pt+otherDed;
+  const netPay=grossEarnings-totalDed;
+  const fmt=v=>'₹ '+Math.round(v).toLocaleString('en-IN');
+  const monthYear=g('slip-month')?new Date(g('slip-month')+'-01').toLocaleDateString('en-IN',{month:'long',year:'numeric'}):'—';
+  const doj=g('emp-doj')?new Date(g('emp-doj')).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}):'—';
+
+  document.getElementById('slip-preview').innerHTML=`
+    <div class="slip-header">
+      <div><h2>${g('co-name')||'Company Name'}</h2><p>${g('co-addr')||'Company Address'}</p></div>
+      <div class="slip-title">SALARY SLIP<div class="month">${monthYear}</div></div>
+    </div>
+    <div class="info-grid">
+      <div class="info-row"><div class="lbl">Employee Name</div><div class="val">${g('emp-name')||'—'}</div></div>
+      <div class="info-row"><div class="lbl">Employee ID</div><div class="val">${g('emp-id')||'—'}</div></div>
+      <div class="info-row"><div class="lbl">Designation</div><div class="val">${g('emp-desig')||'—'}</div></div>
+      <div class="info-row"><div class="lbl">Department</div><div class="val">${g('emp-dept')||'—'}</div></div>
+      <div class="info-row"><div class="lbl">Date of Joining</div><div class="val">${doj}</div></div>
+      <div class="info-row"><div class="lbl">PAN Number</div><div class="val" style="font-family:'JetBrains Mono',monospace">${g('emp-pan')||'—'}</div></div>
+      <div class="info-row"><div class="lbl">Bank Account</div><div class="val">${g('emp-bank')||'—'}</div></div>
+      <div class="info-row"><div class="lbl">UAN (PF)</div><div class="val">${g('emp-uan')||'—'}</div></div>
+      <div class="info-row"><div class="lbl">Working Days</div><div class="val">${workDays}</div></div>
+      <div class="info-row"><div class="lbl">Days Present</div><div class="val">${daysPresent}</div></div>
+    </div>
+    <div class="earnings-grid">
+      <div class="earn-box">
+        <div class="box-title">Earnings</div>
+        <div class="box-row"><span class="lbl">Basic Salary</span><span class="val">${fmt(basic)}</span></div>
+        <div class="box-row"><span class="lbl">HRA</span><span class="val">${fmt(hra)}</span></div>
+        <div class="box-row"><span class="lbl">Conveyance</span><span class="val">${fmt(conv)}</span></div>
+        <div class="box-row"><span class="lbl">Medical</span><span class="val">${fmt(medical)}</span></div>
+        ${special?`<div class="box-row"><span class="lbl">Special Allowance</span><span class="val">${fmt(special)}</span></div>`:''}
+        ${other?`<div class="box-row"><span class="lbl">Other Allowance</span><span class="val">${fmt(other)}</span></div>`:''}
+        <div class="box-total"><span>Gross Earnings</span><span>${fmt(grossEarnings)}</span></div>
+      </div>
+      <div class="deduct-box">
+        <div class="box-title">Deductions</div>
+        <div class="box-row"><span class="lbl">PF (Employee)</span><span class="val">${fmt(pfEmp)}</span></div>
+        <div class="box-row"><span class="lbl">PF (Employer)</span><span class="val">${fmt(n('pf-er'))}</span></div>
+        ${esiEmp?`<div class="box-row"><span class="lbl">ESI</span><span class="val">${fmt(esiEmp)}</span></div>`:''}
+        ${tds?`<div class="box-row"><span class="lbl">TDS</span><span class="val">${fmt(tds)}</span></div>`:''}
+        <div class="box-row"><span class="lbl">Professional Tax</span><span class="val">${fmt(pt)}</span></div>
+        ${otherDed?`<div class="box-row"><span class="lbl">Other</span><span class="val">${fmt(otherDed)}</span></div>`:''}
+        <div class="box-total"><span>Total Deductions</span><span>${fmt(totalDed)}</span></div>
+      </div>
+    </div>
+    <div class="net-row"><div class="label">Net Pay (Take Home)</div><div class="amount">${fmt(netPay)}</div></div>
+    <div class="words-row"><span>In Words:</span>${numWords(netPay)}</div>
+    <div class="slip-footer">
+      <div style="font-size:11px;color:#888">This is a computer generated salary slip and does not require signature.</div>
+      <div><div class="sign-area">Authorized Signatory<br>${g('co-name')||'Company Name'}</div></div>
+    </div>
+  `;
+}
+window.onload=()=>{
+  document.getElementById('slip-month').value=new Date().toISOString().substring(0,7);
+  upd();
+};
+</script>
+</body>
+</html>

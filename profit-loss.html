@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Free Profit & Loss Calculator — Business P&L Statement Generator</title>
+<meta name="description" content="Free online profit and loss calculator for small businesses. Calculate gross profit, net profit, profit margin and generate P&L statement instantly."/>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f5f7fa;min-height:100vh;color:#111}
+.nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:14px 24px;display:flex;align-items:center;gap:16px}
+.nav .logo{font-weight:700;font-size:15px;color:#111;text-decoration:none}
+.nav .logo span{color:#22c55e}
+.nav-links{display:flex;gap:16px;margin-left:auto}
+.nav-links a{font-size:13px;color:#666;text-decoration:none}
+.hero{background:linear-gradient(135deg,#052e16,#166534);color:#fff;padding:48px 24px;text-align:center}
+.hero h1{font-size:32px;font-weight:700;margin-bottom:8px;letter-spacing:-.5px}
+.hero p{font-size:15px;color:#86efac}
+.container{max-width:720px;margin:0 auto;padding:32px 16px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,.06);margin-bottom:20px}
+.card h2{font-size:14px;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:.8px;color:#555}
+.card h2.green{color:#15803d}
+.card h2.red{color:#dc2626}
+.item-row{display:flex;gap:8px;margin-bottom:8px;align-items:center}
+.item-row input{flex:1;padding:10px 12px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:13px;font-family:'Inter',sans-serif;transition:border-color .2s}
+.item-row input:focus{outline:none;border-color:#22c55e}
+.item-row input[type=number]{max-width:130px;text-align:right}
+.del-btn{background:none;border:1px solid #fee2e2;color:#ef4444;width:30px;height:36px;border-radius:8px;cursor:pointer;font-size:16px;flex-shrink:0}
+.add-btn{background:none;border:1.5px dashed #d1fae5;color:#22c55e;padding:9px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;width:100%;font-family:'Inter',sans-serif;transition:.2s}
+.add-btn:hover{background:#f0fdf4}
+.add-btn.red-add{border-color:#fee2e2;color:#ef4444}
+.add-btn.red-add:hover{background:#fef2f2}
+.calc-btn{width:100%;padding:14px;background:#22c55e;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;margin-top:4px;transition:.2s}
+.calc-btn:hover{background:#16a34a}
+.pl-statement{background:#fff;border-radius:16px;padding:28px;box-shadow:0 2px 16px rgba(0,0,0,.06);margin-bottom:20px;display:none}
+.pl-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid #e5e7eb}
+.pl-title h2{font-size:18px;font-weight:700}
+.pl-title span{font-size:12px;color:#888}
+.pl-section{margin-bottom:16px}
+.pl-section-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#888;margin-bottom:8px}
+.pl-row{display:flex;justify-content:space-between;padding:7px 0;font-size:13.5px;border-bottom:1px solid #f5f5f5}
+.pl-row:last-child{border-bottom:none}
+.pl-row .name{color:#444}
+.pl-row .amount{font-family:'JetBrains Mono',monospace;font-weight:500}
+.pl-row .amount.positive{color:#15803d}
+.pl-row .amount.negative{color:#dc2626}
+.pl-total{display:flex;justify-content:space-between;padding:12px 0;font-size:14px;font-weight:700;border-top:2px solid #e5e7eb;margin-top:8px}
+.pl-total.green{color:#15803d;border-color:#86efac}
+.pl-total.red{color:#dc2626;border-color:#fca5a5}
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.kpi-card{border-radius:12px;padding:16px;text-align:center}
+.kpi-card .val{font-size:22px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.kpi-card .lbl{font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-top:4px}
+.kpi-card.profit{background:#f0fdf4;color:#166534}
+.kpi-card.margin{background:#eff6ff;color:#1d4ed8}
+.kpi-card.revenue{background:#fefce8;color:#854d0e}
+.print-btn{background:none;border:1.5px solid #e5e7eb;padding:9px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;font-family:'Inter',sans-serif;float:right}
+.footer{text-align:center;padding:32px 16px;color:#888;font-size:13px}
+.footer a{color:#22c55e;text-decoration:none}
+@media print{.nav,.calc-btn,.print-btn,.add-btn,.del-btn{display:none!important}.pl-statement{display:block!important}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="logo">Bill<span>Pad</span></a>
+  <div class="nav-links">
+    <a href="index.html">Invoice Generator</a>
+    <a href="gst-calculator.html">GST Calc</a>
+    <a href="emi-calculator.html">EMI Calc</a>
+    <a href="salary-slip.html">Salary Slip</a>
+  </div>
+</nav>
+<div class="hero">
+  <h1>Profit & Loss Calculator</h1>
+  <p>Generate instant P&L statement for your business</p>
+</div>
+<div class="container">
+  <div class="grid">
+    <div class="card">
+      <h2 class="green">💰 Income / Revenue</h2>
+      <div id="income-items">
+        <div class="item-row"><input placeholder="Item name" value="Product Sales"/><input type="number" placeholder="0" value="500000"/><button class="del-btn" onclick="delItem(this)">×</button></div>
+        <div class="item-row"><input placeholder="Item name" value="Service Income"/><input type="number" placeholder="0" value="150000"/><button class="del-btn" onclick="delItem(this)">×</button></div>
+      </div>
+      <button class="add-btn" onclick="addItem('income-items')">+ Add Income Source</button>
+    </div>
+    <div class="card">
+      <h2 class="red">📉 Cost of Goods Sold (COGS)</h2>
+      <div id="cogs-items">
+        <div class="item-row"><input placeholder="Item name" value="Raw Materials"/><input type="number" placeholder="0" value="200000"/><button class="del-btn" onclick="delItem(this)">×</button></div>
+        <div class="item-row"><input placeholder="Item name" value="Labour Cost"/><input type="number" placeholder="0" value="80000"/><button class="del-btn" onclick="delItem(this)">×</button></div>
+      </div>
+      <button class="add-btn red-add" onclick="addItem('cogs-items')">+ Add COGS Item</button>
+    </div>
+  </div>
+  <div class="card">
+    <h2 class="red">🧾 Operating Expenses</h2>
+    <div class="grid" id="expense-grid">
+      <div id="expense-items-1">
+        <div class="item-row"><input placeholder="Expense name" value="Rent"/><input type="number" placeholder="0" value="25000"/><button class="del-btn" onclick="delItem(this)">×</button></div>
+        <div class="item-row"><input placeholder="Expense name" value="Salaries"/><input type="number" placeholder="0" value="60000"/><button class="del-btn" onclick="delItem(this)">×</button></div>
+        <div class="item-row"><input placeholder="Expense name" value="Utilities"/><input type="number" placeholder="0" value="8000"/><button class="del-btn" onclick="delItem(this)">×</button></div>
+      </div>
+      <div id="expense-items-2">
+        <div class="item-row"><input placeholder="Expense name" value="Marketing"/><input type="number" placeholder="0" value="15000"/><button class="del-btn" onclick="delItem(this)">×</button></div>
+        <div class="item-row"><input placeholder="Expense name" value="Transportation"/><input type="number" placeholder="0" value="12000"/><button class="del-btn" onclick="delItem(this)">×</button></div>
+        <div class="item-row"><input placeholder="Expense name" value="Miscellaneous"/><input type="number" placeholder="0" value="5000"/><button class="del-btn" onclick="delItem(this)">×</button></div>
+      </div>
+    </div>
+    <button class="add-btn red-add" style="margin-top:8px" onclick="addItem('expense-items-1')">+ Add Expense</button>
+  </div>
+  <div class="card" style="padding:20px">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+      <div><label style="display:block;font-size:11px;font-weight:600;color:#555;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">Tax Rate (%)</label>
+      <input type="number" id="tax-rate" value="25" min="0" max="100" style="padding:10px 12px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;width:100%"/></div>
+      <div><label style="display:block;font-size:11px;font-weight:600;color:#555;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px">Period</label>
+      <select id="period" style="padding:10px 12px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;width:100%">
+        <option>Monthly</option><option>Quarterly</option><option selected>Annual</option>
+      </select></div>
+    </div>
+    <button class="calc-btn" onclick="calculate()">Generate P&L Statement</button>
+  </div>
+  <div class="pl-statement" id="pl-statement">
+    <div class="pl-title">
+      <div><h2>Profit & Loss Statement</h2><span id="pl-period-label">Annual Statement</span></div>
+      <button class="print-btn" onclick="window.print()">🖨 Print</button>
+    </div>
+    <div class="kpi-grid" id="kpi-grid"></div>
+    <div id="pl-content"></div>
+  </div>
+</div>
+<div class="footer"><p>Free tool by <a href="index.html">GST Invoice Pro</a> · No signup required · Always free</p></div>
+<script>
+function addItem(containerId){
+  const c=document.getElementById(containerId);
+  const div=document.createElement('div');div.className='item-row';
+  div.innerHTML='<input placeholder="Item name"/><input type="number" placeholder="0"/><button class="del-btn" onclick="delItem(this)">×</button>';
+  c.appendChild(div);
+}
+function delItem(btn){const row=btn.parentElement;if(row.parentElement.querySelectorAll('.item-row').length>1)row.remove();}
+function getItems(id){
+  return Array.from(document.getElementById(id).querySelectorAll('.item-row')).map(row=>{
+    const inputs=row.querySelectorAll('input');
+    return {name:inputs[0].value||'Item',amount:parseFloat(inputs[1].value)||0};
+  });
+}
+function sumItems(items){return items.reduce((s,i)=>s+i.amount,0);}
+function fmt(v){return'₹ '+Math.abs(v).toLocaleString('en-IN',{minimumFractionDigits:0});}
+function calculate(){
+  const income=getItems('income-items'), cogs=getItems('cogs-items');
+  const exp1=getItems('expense-items-1'), exp2=getItems('expense-items-2');
+  const expenses=[...exp1,...exp2];
+  const totalIncome=sumItems(income), totalCogs=sumItems(cogs), totalExp=sumItems(expenses);
+  const grossProfit=totalIncome-totalCogs;
+  const operatingProfit=grossProfit-totalExp;
+  const taxRate=parseFloat(document.getElementById('tax-rate').value)||0;
+  const tax=Math.max(0,operatingProfit*(taxRate/100));
+  const netProfit=operatingProfit-tax;
+  const grossMargin=totalIncome?((grossProfit/totalIncome)*100).toFixed(1):0;
+  const netMargin=totalIncome?((netProfit/totalIncome)*100).toFixed(1):0;
+  const period=document.getElementById('period').value;
+  document.getElementById('pl-period-label').textContent=period+' Statement';
+  document.getElementById('kpi-grid').innerHTML=`
+    <div class="kpi-card revenue"><div class="val">${fmt(totalIncome)}</div><div class="lbl">Total Revenue</div></div>
+    <div class="kpi-card profit"><div class="val">${fmt(netProfit)}</div><div class="lbl">Net Profit</div></div>
+    <div class="kpi-card margin"><div class="val">${netMargin}%</div><div class="lbl">Net Margin</div></div>
+  `;
+  let html=`
+    <div class="pl-section">
+      <div class="pl-section-title">Revenue</div>
+      ${income.map(i=>`<div class="pl-row"><span class="name">${i.name}</span><span class="amount positive">${fmt(i.amount)}</span></div>`).join('')}
+      <div class="pl-total green"><span>Total Revenue</span><span>${fmt(totalIncome)}</span></div>
+    </div>
+    <div class="pl-section">
+      <div class="pl-section-title">Cost of Goods Sold</div>
+      ${cogs.map(i=>`<div class="pl-row"><span class="name">${i.name}</span><span class="amount negative">(${fmt(i.amount)})</span></div>`).join('')}
+      <div class="pl-total ${grossProfit>=0?'green':'red'}"><span>Gross Profit (${grossMargin}% margin)</span><span>${fmt(grossProfit)}</span></div>
+    </div>
+    <div class="pl-section">
+      <div class="pl-section-title">Operating Expenses</div>
+      ${expenses.map(i=>`<div class="pl-row"><span class="name">${i.name}</span><span class="amount negative">(${fmt(i.amount)})</span></div>`).join('')}
+      <div class="pl-total ${operatingProfit>=0?'green':'red'}"><span>Operating Profit (EBIT)</span><span>${fmt(operatingProfit)}</span></div>
+    </div>
+    <div class="pl-section">
+      <div class="pl-row"><span class="name">Tax @ ${taxRate}%</span><span class="amount negative">(${fmt(tax)})</span></div>
+      <div class="pl-total ${netProfit>=0?'green':'red'}" style="font-size:16px"><span>Net Profit</span><span>${fmt(netProfit)}</span></div>
+    </div>
+  `;
+  document.getElementById('pl-content').innerHTML=html;
+  document.getElementById('pl-statement').style.display='block';
+  document.getElementById('pl-statement').scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>

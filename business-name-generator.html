@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Free Business Name Generator India — AI Company Name Ideas</title>
+<meta name="description" content="Free business name generator for Indian companies. Get instant company name ideas for your startup, LLC, Pvt Ltd. Check name availability."/>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f5f7fa;min-height:100vh;color:#111}
+.nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:14px 24px;display:flex;align-items:center;gap:16px}
+.nav .logo{font-weight:700;font-size:15px;color:#111;text-decoration:none}
+.nav .logo span{color:#22c55e}
+.nav-links{display:flex;gap:16px;margin-left:auto}
+.nav-links a{font-size:13px;color:#666;text-decoration:none}
+.hero{background:linear-gradient(135deg,#18181b,#7c3aed);color:#fff;padding:48px 24px;text-align:center}
+.hero h1{font-size:32px;font-weight:700;margin-bottom:8px;letter-spacing:-.5px}
+.hero p{font-size:15px;color:#c4b5fd}
+.container{max-width:680px;margin:0 auto;padding:32px 16px}
+.card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 2px 16px rgba(0,0,0,.06);margin-bottom:20px}
+.form-group{margin-bottom:16px}
+label{display:block;font-size:12px;font-weight:600;color:#555;margin-bottom:6px;letter-spacing:.5px;text-transform:uppercase}
+input,select{width:100%;padding:12px 14px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;transition:border-color .2s}
+input:focus,select:focus{outline:none;border-color:#7c3aed}
+.industry-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.industry-btn{padding:10px 6px;border:1.5px solid #e5e7eb;border-radius:10px;text-align:center;cursor:pointer;font-size:12px;font-weight:600;color:#666;background:#fff;transition:.2s;font-family:'Inter',sans-serif}
+.industry-btn:hover{border-color:#7c3aed}
+.industry-btn.active{border-color:#7c3aed;background:#f5f3ff;color:#7c3aed}
+.gen-btn{width:100%;padding:14px;background:#7c3aed;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.gen-btn:hover{background:#6d28d9}
+.gen-btn:disabled{opacity:.6;cursor:not-allowed}
+.names-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.name-card{background:#f8fafc;border:1.5px solid #e5e7eb;border-radius:12px;padding:16px;cursor:pointer;transition:.2s;position:relative}
+.name-card:hover{border-color:#7c3aed;background:#f5f3ff}
+.name-card .name{font-size:16px;font-weight:700;color:#111;margin-bottom:4px}
+.name-card .type{font-size:11px;color:#888;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.name-card .copy-hint{font-size:10px;color:#a78bfa;margin-top:8px}
+.name-card.copied{border-color:#22c55e;background:#f0fdf4}
+.name-card.copied .name{color:#166534}
+.loading{text-align:center;padding:32px;color:#888;display:none}
+.spinner{display:inline-block;width:32px;height:32px;border:3px solid #e5e7eb;border-top-color:#7c3aed;border-radius:50%;animation:spin .8s linear infinite;margin-bottom:12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.style-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.style-btn{padding:9px;border:1.5px solid #e5e7eb;border-radius:8px;text-align:center;cursor:pointer;font-size:12px;font-weight:600;color:#666;background:#fff;transition:.2s;font-family:'Inter',sans-serif}
+.style-btn:hover{border-color:#7c3aed}
+.style-btn.active{border-color:#7c3aed;background:#f5f3ff;color:#7c3aed}
+.footer{text-align:center;padding:32px 16px;color:#888;font-size:13px}
+.footer a{color:#22c55e;text-decoration:none}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="logo">Bill<span>Pad</span></a>
+  <div class="nav-links">
+    <a href="index.html">Invoice Generator</a>
+    <a href="gst-calculator.html">GST Calc</a>
+    <a href="emi-calculator.html">EMI Calc</a>
+    <a href="profit-loss.html">P&L Calc</a>
+  </div>
+</nav>
+<div class="hero">
+  <h1>Business Name Generator</h1>
+  <p>Get instant company name ideas for your business</p>
+</div>
+<div class="container">
+  <div class="card">
+    <div class="form-group">
+      <label>Your Business Keywords</label>
+      <input type="text" id="keywords" placeholder="e.g. tech, cloud, fast, smart, green" />
+    </div>
+    <div class="form-group">
+      <label>Industry</label>
+      <div class="industry-grid">
+        <button class="industry-btn active" onclick="setIndustry('technology',this)">💻 Tech</button>
+        <button class="industry-btn" onclick="setIndustry('retail',this)">🛍 Retail</button>
+        <button class="industry-btn" onclick="setIndustry('food',this)">🍕 Food</button>
+        <button class="industry-btn" onclick="setIndustry('finance',this)">💰 Finance</button>
+        <button class="industry-btn" onclick="setIndustry('health',this)">🏥 Health</button>
+        <button class="industry-btn" onclick="setIndustry('education',this)">📚 Education</button>
+        <button class="industry-btn" onclick="setIndustry('construction',this)">🏗 Construction</button>
+        <button class="industry-btn" onclick="setIndustry('consulting',this)">💼 Consulting</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Name Style</label>
+      <div class="style-grid">
+        <button class="style-btn active" onclick="setStyle('modern',this)">Modern & Catchy</button>
+        <button class="style-btn" onclick="setStyle('professional',this)">Professional</button>
+        <button class="style-btn" onclick="setStyle('creative',this)">Creative & Fun</button>
+        <button class="style-btn" onclick="setStyle('traditional',this)">Traditional</button>
+        <button class="style-btn" onclick="setStyle('hindi',this)">Hindi/Indian</button>
+        <button class="style-btn" onclick="setStyle('short',this)">Short & Punchy</button>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Business Type</label>
+      <select id="biz-type">
+        <option>Pvt. Ltd. Company</option>
+        <option>LLP (Limited Liability Partnership)</option>
+        <option>Sole Proprietorship</option>
+        <option>One Person Company (OPC)</option>
+        <option>Partnership Firm</option>
+      </select>
+    </div>
+    <button class="gen-btn" onclick="generate()" id="gen-btn">✨ Generate Business Names</button>
+    <div class="loading" id="loading"><div class="spinner"></div><p>Generating creative names...</p></div>
+    <div class="names-grid" id="names-grid"></div>
+  </div>
+  <div class="card">
+    <h2 style="font-size:15px;font-weight:600;margin-bottom:16px">💡 Tips for Choosing a Business Name</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div style="background:#f8fafc;border-radius:10px;padding:14px"><strong style="font-size:13px;display:block;margin-bottom:4px">Easy to Spell</strong><p style="font-size:12px;color:#666">Choose names that are easy to spell and remember for customers.</p></div>
+      <div style="background:#f8fafc;border-radius:10px;padding:14px"><strong style="font-size:13px;display:block;margin-bottom:4px">Check Availability</strong><p style="font-size:12px;color:#666">Verify on MCA portal (mca.gov.in) before registering your company.</p></div>
+      <div style="background:#f8fafc;border-radius:10px;padding:14px"><strong style="font-size:13px;display:block;margin-bottom:4px">Domain Name</strong><p style="font-size:12px;color:#666">Check if .com or .in domain is available for your chosen name.</p></div>
+      <div style="background:#f8fafc;border-radius:10px;padding:14px"><strong style="font-size:13px;display:block;margin-bottom:4px">Trademark Check</strong><p style="font-size:12px;color:#666">Search IP India trademark database before finalizing the name.</p></div>
+    </div>
+  </div>
+</div>
+<div class="footer"><p>Free tool by <a href="index.html">GST Invoice Pro</a> · No signup required · Always free</p></div>
+<script>
+let industry='technology', style='modern';
+function setIndustry(i,el){industry=i;document.querySelectorAll('.industry-btn').forEach(e=>e.classList.remove('active'));el.classList.add('active');}
+function setStyle(s,el){style=s;document.querySelectorAll('.style-btn').forEach(e=>e.classList.remove('active'));el.classList.add('active');}
+
+const nameData={
+  technology:{prefixes:['Tech','Digi','Smart','Nexo','Zync','Inno','Velo','Axio','Cyph','Sync'],suffixes:['Labs','Solutions','Systems','Works','Hub','Soft','Mind','Byte','Stack','Cloud']},
+  retail:{prefixes:['Quick','Prime','Easy','Fresh','Swift','Bazaar','Kart','Mart','Shop','Pick'],suffixes:['Mart','Store','Hub','Select','Point','Junction','Palace','Emporium','Zone','Plaza']},
+  food:{prefixes:['Spice','Fresh','Tasty','Royal','Golden','Savor','Desi','Zest','Bite','Chef'],suffixes:['Kitchen','Bites','Flavors','Grill','Bistro','Garden','Delight','Express','House','Corner']},
+  finance:{prefixes:['Fint','Wealth','Capital','Trust','Secure','Prosper','Apex','Summit','Prime','Dhan'],suffixes:['Capital','Finance','Ventures','Advisors','Group','Partners','Wealth','Invest','Fund','Corp']},
+  health:{prefixes:['Med','Care','Wellness','Heal','Vital','Pure','Life','Cure','Health','Swasth'],suffixes:['Care','Clinic','Health','Wellness','Center','Plus','360','Solutions','Pharma','Life']},
+  education:{prefixes:['Learn','Bright','Smart','Excel','Guru','Vidya','Gyan','Skill','Edu','Talent'],suffixes:['Academy','Institute','Hub','Learning','Classes','School','Center','Skills','Minds','Tutorials']},
+  construction:{prefixes:['Build','Solid','Prime','Infra','Rock','Steel','Arch','Landmark','Empire','Urban'],suffixes:['Infra','Builders','Construction','Projects','Developers','Homes','Realty','Works','Group','Associates']},
+  consulting:{prefixes:['Strat','Pro','Expert','Consult','Advise','Lead','Ace','Elite','Primo','Nexus'],suffixes:['Consulting','Advisors','Partners','Group','Associates','Solutions','Management','Strategy','Insights','Firm']}
+};
+const hindiWords=['Shakti','Pragati','Unnati','Samriddhi','Udaan','Prerna','Vikas','Samarth','Tej','Prabha','Anant','Disha','Sankalp','Veer','Jyoti'];
+const creativeWords=['Zap','Blaze','Nova','Spark','Flux','Nexus','Apex','Zenith','Orbit','Prism','Vibe','Glow','Edge','Peak','Dash'];
+const shortWords=['Zap','Rovo','Flio','Kivo','Nexo','Axio','Vivo','Lyco','Zyno','Memo','Pivo','Tino','Rivo','Xivo','Zivo'];
+
+function generate(){
+  const kw=document.getElementById('keywords').value.trim();
+  const bizType=document.getElementById('biz-type').value;
+  const btn=document.getElementById('gen-btn');
+  btn.disabled=true;
+  document.getElementById('loading').style.display='block';
+  document.getElementById('names-grid').innerHTML='';
+  setTimeout(()=>{
+    const data=nameData[industry]||nameData.technology;
+    const suffix=bizType.includes('Pvt')?'Pvt. Ltd.':bizType.includes('LLP')?'LLP':bizType.includes('OPC')?'OPC Pvt. Ltd.':'';
+    let names=[];
+    // Generate based on style
+    for(let i=0;i<8;i++){
+      let name='';
+      const kwWords=kw.split(/\s+/).filter(Boolean);
+      const base=kwWords.length>0?kwWords[Math.floor(Math.random()*kwWords.length)]:'';
+      if(style==='hindi'){
+        const h=hindiWords[Math.floor(Math.random()*hindiWords.length)];
+        name=i%2===0?h+' '+data.suffixes[Math.floor(Math.random()*data.suffixes.length)]:data.prefixes[Math.floor(Math.random()*data.prefixes.length)]+' '+h;
+      } else if(style==='creative'){
+        const c=creativeWords[Math.floor(Math.random()*creativeWords.length)];
+        name=c+(base?capitalize(base):'')+(Math.random()>.5?data.suffixes[Math.floor(Math.random()*data.suffixes.length)]:'');
+      } else if(style==='short'){
+        name=shortWords[Math.floor(Math.random()*shortWords.length)]+(base?capitalize(base.slice(0,3)):'');
+      } else if(style==='traditional'){
+        name=(base?capitalize(base)+' ':'')+'& '+data.suffixes[Math.floor(Math.random()*data.suffixes.length)];
+      } else {
+        const pre=data.prefixes[Math.floor(Math.random()*data.prefixes.length)];
+        const suf=data.suffixes[Math.floor(Math.random()*data.suffixes.length)];
+        name=base?capitalize(base)+suf:pre+suf;
+      }
+      if(suffix) name+=' '+suffix;
+      names.push(name);
+    }
+    // Remove duplicates
+    names=[...new Set(names)];
+    const styles=['Modern','Professional','Creative','Classic','Innovative','Dynamic','Strategic','Premium'];
+    document.getElementById('names-grid').innerHTML=names.slice(0,8).map((n,i)=>`
+      <div class="name-card" onclick="copyName(this,'${n}')">
+        <div class="name">${n}</div>
+        <div class="type">${styles[i]||'Professional'}</div>
+        <div class="copy-hint">Click to copy</div>
+      </div>`).join('');
+    document.getElementById('loading').style.display='none';
+    btn.disabled=false;
+  },800);
+}
+function capitalize(s){return s.charAt(0).toUpperCase()+s.slice(1).toLowerCase();}
+function copyName(el,name){
+  navigator.clipboard.writeText(name).then(()=>{
+    el.classList.add('copied');
+    el.querySelector('.copy-hint').textContent='✓ Copied!';
+    setTimeout(()=>{el.classList.remove('copied');el.querySelector('.copy-hint').textContent='Click to copy';},2000);
+  });
+}
+</script>
+</body>
+</html>

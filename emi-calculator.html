@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Free EMI Calculator India — Home Loan, Car Loan, Personal Loan</title>
+<meta name="description" content="Free online EMI calculator for home loan, car loan, personal loan. Calculate monthly EMI, total interest and payment schedule instantly."/>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f5f7fa;min-height:100vh;color:#111}
+.nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:14px 24px;display:flex;align-items:center;gap:16px}
+.nav .logo{font-weight:700;font-size:15px;color:#111;text-decoration:none}
+.nav .logo span{color:#22c55e}
+.nav-links{display:flex;gap:16px;margin-left:auto}
+.nav-links a{font-size:13px;color:#666;text-decoration:none}
+.nav-links a:hover{color:#22c55e}
+.hero{background:linear-gradient(135deg,#1e1b4b,#3730a3);color:#fff;padding:48px 24px;text-align:center}
+.hero h1{font-size:32px;font-weight:700;margin-bottom:8px;letter-spacing:-.5px}
+.hero p{font-size:15px;color:#c7d2fe}
+.container{max-width:680px;margin:0 auto;padding:32px 16px}
+.card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 2px 16px rgba(0,0,0,.06);margin-bottom:20px}
+.loan-types{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px}
+.loan-type{padding:10px;border:1.5px solid #e5e7eb;border-radius:10px;text-align:center;cursor:pointer;font-size:12px;font-weight:600;color:#666;transition:.2s}
+.loan-type:hover{border-color:#6366f1}
+.loan-type.active{border-color:#6366f1;background:#eef2ff;color:#4338ca}
+.slider-group{margin-bottom:20px}
+label{display:block;font-size:12px;font-weight:600;color:#555;margin-bottom:8px;letter-spacing:.5px;text-transform:uppercase}
+.slider-row{display:flex;align-items:center;gap:12px}
+input[type=range]{flex:1;height:6px;accent-color:#6366f1;cursor:pointer}
+.slider-val{background:#eef2ff;color:#4338ca;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;padding:6px 12px;border-radius:8px;min-width:90px;text-align:center}
+input[type=number]{width:100%;padding:11px 14px;border:1.5px solid #e5e7eb;border-radius:10px;font-size:15px;font-family:'Inter',sans-serif;transition:border-color .2s}
+input[type=number]:focus{outline:none;border-color:#6366f1}
+.calc-btn{width:100%;padding:14px;background:#6366f1;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:.2s;margin-top:4px}
+.calc-btn:hover{background:#4f46e5}
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.result-card{background:#f8fafc;border-radius:12px;padding:16px;text-align:center;border:1.5px solid #e5e7eb}
+.result-card.highlight{background:#eef2ff;border-color:#c7d2fe}
+.result-card .val{font-size:20px;font-weight:700;font-family:'JetBrains Mono',monospace;color:#111;margin-bottom:4px}
+.result-card.highlight .val{color:#4338ca}
+.result-card .lbl{font-size:11px;color:#888;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.pie-wrap{display:flex;align-items:center;justify-content:center;gap:32px;margin-top:20px;padding:20px;background:#f8fafc;border-radius:12px}
+.pie{position:relative;width:120px;height:120px}
+.pie canvas{border-radius:50%}
+.legend{display:flex;flex-direction:column;gap:10px}
+.legend-item{display:flex;align-items:center;gap:10px;font-size:13px}
+.legend-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.schedule-wrap{margin-top:20px;max-height:300px;overflow-y:auto;border-radius:10px;border:1px solid #e5e7eb}
+.schedule-wrap table{width:100%;border-collapse:collapse}
+.schedule-wrap th{background:#f8fafc;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#666;padding:10px 12px;text-align:right;position:sticky;top:0}
+.schedule-wrap th:first-child{text-align:left}
+.schedule-wrap td{padding:9px 12px;font-size:12.5px;border-bottom:1px solid #f0f0f0;text-align:right;font-family:'JetBrains Mono',monospace}
+.schedule-wrap td:first-child{text-align:left;font-family:'Inter',sans-serif;font-weight:500}
+.footer{text-align:center;padding:32px 16px;color:#888;font-size:13px}
+.footer a{color:#22c55e;text-decoration:none}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="index.html" class="logo">Bill<span>Pad</span></a>
+  <div class="nav-links">
+    <a href="index.html">Invoice Generator</a>
+    <a href="gst-calculator.html">GST Calc</a>
+    <a href="salary-slip.html">Salary Slip</a>
+    <a href="profit-loss.html">P&L Calc</a>
+  </div>
+</nav>
+<div class="hero">
+  <h1>Free EMI Calculator</h1>
+  <p>Home Loan · Car Loan · Personal Loan · Education Loan</p>
+</div>
+<div class="container">
+  <div class="card">
+    <div class="loan-types">
+      <div class="loan-type active" onclick="setLoan('home',this)">🏠 Home Loan</div>
+      <div class="loan-type" onclick="setLoan('car',this)">🚗 Car Loan</div>
+      <div class="loan-type" onclick="setLoan('personal',this)">💼 Personal</div>
+      <div class="loan-type" onclick="setLoan('education',this)">📚 Education</div>
+    </div>
+    <div class="slider-group">
+      <label>Loan Amount</label>
+      <div class="slider-row">
+        <input type="range" id="amount-slider" min="50000" max="10000000" step="50000" value="2000000" oninput="syncSlider('amount')"/>
+        <div class="slider-val" id="amount-val">₹ 20,00,000</div>
+      </div>
+      <input type="number" id="amount-input" value="2000000" oninput="syncInput('amount')" style="margin-top:8px"/>
+    </div>
+    <div class="slider-group">
+      <label>Annual Interest Rate (%)</label>
+      <div class="slider-row">
+        <input type="range" id="rate-slider" min="1" max="30" step="0.1" value="8.5" oninput="syncSlider('rate')"/>
+        <div class="slider-val" id="rate-val">8.5 %</div>
+      </div>
+    </div>
+    <div class="slider-group">
+      <label>Loan Tenure (Years)</label>
+      <div class="slider-row">
+        <input type="range" id="tenure-slider" min="1" max="30" step="1" value="20" oninput="syncSlider('tenure')"/>
+        <div class="slider-val" id="tenure-val">20 Yrs</div>
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calculate()">Calculate EMI</button>
+    <div class="result-grid" id="result-grid" style="display:none">
+      <div class="result-card highlight"><div class="val" id="r-emi">₹0</div><div class="lbl">Monthly EMI</div></div>
+      <div class="result-card"><div class="val" id="r-interest">₹0</div><div class="lbl">Total Interest</div></div>
+      <div class="result-card"><div class="val" id="r-total">₹0</div><div class="lbl">Total Payment</div></div>
+    </div>
+    <div class="pie-wrap" id="pie-wrap" style="display:none">
+      <canvas id="pie-chart" width="120" height="120"></canvas>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#6366f1"></div><span id="principal-pct">Principal: 0%</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div><span id="interest-pct">Interest: 0%</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <h2 style="font-size:15px;font-weight:600;margin-bottom:16px">Payment Schedule</h2>
+    <div class="schedule-wrap" id="schedule-wrap" style="display:none">
+      <table><thead><tr><th>Year</th><th>Principal</th><th>Interest</th><th>Total Paid</th><th>Balance</th></tr></thead>
+      <tbody id="schedule-body"></tbody></table>
+    </div>
+    <div id="schedule-empty" style="text-align:center;padding:32px;color:#aaa;font-size:14px">Calculate EMI to see payment schedule</div>
+  </div>
+</div>
+<div class="footer"><p>Free tool by <a href="index.html">GST Invoice Pro</a> · No signup required · Always free</p></div>
+<script>
+const defaults={home:{amount:2000000,rate:8.5,tenure:20},car:{amount:800000,rate:9.5,tenure:5},personal:{amount:300000,rate:14,tenure:3},education:{amount:500000,rate:10,tenure:7}};
+function setLoan(type,el){
+  document.querySelectorAll('.loan-type').forEach(e=>e.classList.remove('active'));
+  el.classList.add('active');
+  const d=defaults[type];
+  document.getElementById('amount-slider').value=d.amount;
+  document.getElementById('amount-input').value=d.amount;
+  document.getElementById('rate-slider').value=d.rate;
+  document.getElementById('tenure-slider').value=d.tenure;
+  syncSlider('amount');syncSlider('rate');syncSlider('tenure');
+  calculate();
+}
+function syncSlider(field){
+  if(field==='amount'){
+    const v=parseFloat(document.getElementById('amount-slider').value);
+    document.getElementById('amount-input').value=v;
+    document.getElementById('amount-val').textContent='₹ '+v.toLocaleString('en-IN');
+  } else if(field==='rate'){
+    const v=parseFloat(document.getElementById('rate-slider').value);
+    document.getElementById('rate-val').textContent=v.toFixed(1)+' %';
+  } else {
+    const v=parseInt(document.getElementById('tenure-slider').value);
+    document.getElementById('tenure-val').textContent=v+' Yrs';
+  }
+  calculate();
+}
+function syncInput(field){
+  const v=parseFloat(document.getElementById('amount-input').value)||0;
+  document.getElementById('amount-slider').value=Math.min(v,10000000);
+  document.getElementById('amount-val').textContent='₹ '+v.toLocaleString('en-IN');
+  calculate();
+}
+function calculate(){
+  const P=parseFloat(document.getElementById('amount-input').value)||parseFloat(document.getElementById('amount-slider').value)||0;
+  const r=parseFloat(document.getElementById('rate-slider').value)/100/12;
+  const n=parseInt(document.getElementById('tenure-slider').value)*12;
+  if(!P||!r||!n) return;
+  const emi=P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1);
+  const total=emi*n, interest=total-P;
+  const fmt=v=>'₹'+Math.round(v).toLocaleString('en-IN');
+  document.getElementById('r-emi').textContent=fmt(emi);
+  document.getElementById('r-interest').textContent=fmt(interest);
+  document.getElementById('r-total').textContent=fmt(total);
+  document.getElementById('result-grid').style.display='grid';
+  const pp=Math.round(P/total*100), ip=100-pp;
+  document.getElementById('principal-pct').textContent='Principal: '+pp+'%';
+  document.getElementById('interest-pct').textContent='Interest: '+ip+'%';
+  drawPie(pp,ip);
+  document.getElementById('pie-wrap').style.display='flex';
+  // Schedule
+  let balance=P, rows='';
+  for(let y=1;y<=parseInt(document.getElementById('tenure-slider').value);y++){
+    let yearPrincipal=0,yearInterest=0;
+    for(let m=0;m<12;m++){
+      if(balance<=0) break;
+      const intPay=balance*r, prinPay=Math.min(emi-intPay,balance);
+      yearInterest+=intPay; yearPrincipal+=prinPay; balance-=prinPay;
+    }
+    rows+=`<tr><td>Year ${y}</td><td>${fmt(yearPrincipal)}</td><td>${fmt(yearInterest)}</td><td>${fmt(yearPrincipal+yearInterest)}</td><td>${fmt(Math.max(0,balance))}</td></tr>`;
+  }
+  document.getElementById('schedule-body').innerHTML=rows;
+  document.getElementById('schedule-wrap').style.display='block';
+  document.getElementById('schedule-empty').style.display='none';
+}
+function drawPie(pp,ip){
+  const c=document.getElementById('pie-chart'),ctx=c.getContext('2d');
+  ctx.clearRect(0,0,120,120);
+  const cx=60,cy=60,r=55;
+  const start=-Math.PI/2;
+  ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,start,start+2*Math.PI*(pp/100));ctx.closePath();ctx.fillStyle='#6366f1';ctx.fill();
+  ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,start+2*Math.PI*(pp/100),start+2*Math.PI);ctx.closePath();ctx.fillStyle='#f59e0b';ctx.fill();
+  ctx.beginPath();ctx.arc(cx,cy,30,0,2*Math.PI);ctx.fillStyle='#fff';ctx.fill();
+}
+window.onload=()=>calculate();
+</script>
+</body>
+</html>
